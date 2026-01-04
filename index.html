@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA ARTIVIST 2026 | Activism + Art Calendar for Los Angeles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--white);
+            color: var(--black);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            border: 2px solid var(--black);
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 20px;
+        }
+
+        /* Filters */
+        .filters {
+            border: 1px solid var(--black);
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            margin-bottom: 16px;
+        }
+
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-title {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 4px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 8px;
+            padding: 4px 8px;
+            border: 1px solid var(--black);
+            background: var(--white);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: none;
+        }
+
+        .filter-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .filter-btn.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Category and Type Patterns */
+        .category-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+            vertical-align: middle;
+            border: 1px solid var(--black);
+        }
+
+        .cat-immigration { background: linear-gradient(to right, var(--black) 50%, var(--white) 50%); }
+        .cat-chicano { background: var(--black); }
+        .cat-black-liberation { background: repeating-linear-gradient(45deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
+        .cat-aapi { background: repeating-linear-gradient(0deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
+        .cat-environmental { background: repeating-linear-gradient(90deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
+        .cat-indigenous { background: radial-gradient(circle, var(--black) 1px, var(--white) 1px, var(--white) 2px, var(--black) 2px, var(--black) 3px); background-size: 4px 4px; }
+        .cat-intersectional { background: var(--white); }
+
+        /* Event Type Symbols */
+        .type-symbol {
+            display: inline-block;
+            font-size: 11px;
+            margin-right: 3px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Legend */
+        .legend {
+            border: 1px solid var(--black);
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 8px;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 4px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Calendar */
+        .calendar {
+            display: grid;
+            gap: 12px;
+        }
+
+        .event-card {
+            border: 1px solid var(--black);
+            padding: 12px;
+            transition: none;
+        }
+
+        .event-card:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .event-card:hover a {
+            color: var(--white);
+        }
+
+        .event-card:hover .category-indicator {
+            border-color: var(--white);
+        }
+
+        .event-card:hover .tag {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex: 1;
+        }
+
+        .event-date {
+            font-size: 8px;
+            color: var(--gray);
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        .event-card:hover .event-date {
+            color: var(--white);
+        }
+
+        .event-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 8px;
+        }
+
+        .event-categories {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .event-types {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        .event-venue {
+            font-size: 9px;
+            margin-bottom: 6px;
+        }
+
+        .event-description {
+            font-size: 9px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .event-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .event-link {
+            font-size: 8px;
+            padding: 3px 6px;
+            border: 1px solid var(--black);
+            text-decoration: none;
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .event-link:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .event-card:hover .event-link {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .event-card:hover .event-link:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .event-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .tag {
+            font-size: 7px;
+            padding: 2px 4px;
+            border: 1px solid var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            border: 1px solid var(--black);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 6px 8px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-content {
+            padding: 12px;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .sidebar-content p {
+            margin-bottom: 0;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--black);
+            outline: 2px solid var(--black);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 2px solid var(--black);
+            margin-top: 40px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 8px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LA ARTIVIST 2026</h1>
+            <p class="subtitle">Activism + Art Calendar for Los Angeles · Community Curated</p>
+        </header>
+
+        <div class="main-layout">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-section">
+                        <div class="filter-title">Categories</div>
+                        <div class="filter-buttons" id="categoryFilters">
+                            <button class="filter-btn active" data-category="all">All</button>
+                            <button class="filter-btn" data-category="immigration">Immigration</button>
+                            <button class="filter-btn" data-category="chicano">Chicano/Latinx</button>
+                            <button class="filter-btn" data-category="black-liberation">Black Liberation</button>
+                            <button class="filter-btn" data-category="aapi">AAPI</button>
+                            <button class="filter-btn" data-category="environmental">Environmental</button>
+                            <button class="filter-btn" data-category="indigenous">Indigenous</button>
+                            <button class="filter-btn" data-category="intersectional">Intersectional</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <div class="filter-title">Event Types</div>
+                        <div class="filter-buttons" id="typeFilters">
+                            <button class="filter-btn active" data-type="all">All</button>
+                            <button class="filter-btn" data-type="exhibition">Exhibition</button>
+                            <button class="filter-btn" data-type="workshop">Workshop</button>
+                            <button class="filter-btn" data-type="performance">Performance</button>
+                            <button class="filter-btn" data-type="film">Film</button>
+                            <button class="filter-btn" data-type="talk">Talk</button>
+                            <button class="filter-btn" data-type="reading">Reading</button>
+                            <button class="filter-btn" data-type="mural">Mural</button>
+                            <button class="filter-btn" data-type="festival">Festival</button>
+                            <button class="filter-btn" data-type="concert">Concert</button>
+                            <button class="filter-btn" data-type="meeting">Meeting</button>
+                            <button class="filter-btn" data-type="public-art">Public Art</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="legend">
+                    <div class="legend-title">Legend</div>
+                    <div class="legend-grid">
+                        <div class="legend-item">
+                            <span class="category-indicator cat-immigration"></span>
+                            <span>Immigration & Border Justice</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-chicano"></span>
+                            <span>Chicano/Latinx Liberation</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-black-liberation"></span>
+                            <span>Black Liberation</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-aapi"></span>
+                            <span>AAPI Rights & History</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-environmental"></span>
+                            <span>Environmental Justice</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-indigenous"></span>
+                            <span>Indigenous Rights</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="category-indicator cat-intersectional"></span>
+                            <span>Intersectional/Coalition</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--black);">
+                        <div class="legend-title" style="margin-bottom: 6px;">Event Types</div>
+                        <div style="line-height: 1.8;">
+                            <span class="type-symbol">■</span> Exhibition
+                            <span class="type-symbol" style="margin-left: 8px;">◆</span> Workshop
+                            <span class="type-symbol" style="margin-left: 8px;">▲</span> Performance
+                            <span class="type-symbol" style="margin-left: 8px;">●</span> Film<br>
+                            <span class="type-symbol">▶</span> Talk
+                            <span class="type-symbol" style="margin-left: 8px;">◐</span> Reading
+                            <span class="type-symbol" style="margin-left: 8px;">◀</span> Mural
+                            <span class="type-symbol" style="margin-left: 8px;">★</span> Festival<br>
+                            <span class="type-symbol">♪</span> Concert
+                            <span class="type-symbol" style="margin-left: 8px;">○</span> Meeting
+                            <span class="type-symbol" style="margin-left: 8px;">◇</span> Public Art
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="calendar" id="calendar">
+                    <div class="loading">LOADING EVENTS...</div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-header">SUBMIT EVENT</div>
+                    <div class="sidebar-content">
+                        <p>Know of an activism or human rights art event? Submit via GitHub Issues.</p>
+                        <a href="#" class="btn-primary" id="submitBtn">SUBMIT EVENT</a>
+                        <p style="margin-top: 8px; font-size: 8px; color: var(--gray);">Requires GitHub account</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-header">RECOMMENDED READING</div>
+                    <div class="sidebar-content">
+                        <p style="margin-bottom: 8px;"><a href="https://www.rebelyellcreative.com/the-art-of-resistance-podcast" target="_blank" style="color: var(--black); text-decoration: underline;">🎙️ The Art of Resistance</a><br><span style="font-size: 8px; color: var(--gray);">Podcast</span></p>
+                        <p><a href="https://monoskop.org/images/f/f3/Felshin_Nina_ed_But_Is_It_Art_The_Spirit_of_Art_as_Activism_1994.pdf" target="_blank" style="color: var(--black); text-decoration: underline;">📖 But is it art?</a><br><span style="font-size: 8px; color: var(--gray);">PDF</span></p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-header">QUICK LINKS</div>
+                    <div class="sidebar-content">
+                        <p style="margin-bottom: 8px;"><a href="https://molaa.org/" target="_blank" style="color: var(--black); text-decoration: underline;">MOLAA</a><br><span style="font-size: 8px; color: var(--gray);">Free Sundays</span></p>
+                        <p style="margin-bottom: 8px;"><a href="https://vincentpriceartmuseum.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Vincent Price Art Museum</a><br><span style="font-size: 8px; color: var(--gray);">Always Free</span></p>
+                        <p style="margin-bottom: 8px;"><a href="https://lapca.org/" target="_blank" style="color: var(--black); text-decoration: underline;">LA Plaza de Cultura</a><br><span style="font-size: 8px; color: var(--gray);">Free Wed-Sun</span></p>
+                        <p style="margin-bottom: 8px;"><a href="https://www.museumofsocialjustice.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Museum of Social Justice</a><br><span style="font-size: 8px; color: var(--gray);">Free Thu-Sun</span></p>
+                        <p style="margin-bottom: 8px;"><a href="https://sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">SPARC</a></p>
+                        <p style="margin-bottom: 8px;"><a href="https://www.instagram.com/allpowerbooks/" target="_blank" style="color: var(--black); text-decoration: underline;">All Power Books</a></p>
+                        <p><a href="https://thestrategycenter.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Strategy and Soul</a></p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-header">CONTRIBUTE</div>
+                    <div class="sidebar-content">
+                        <p style="margin-bottom: 8px;">This is an open-source project. View on GitHub to contribute.</p>
+                        <a href="https://github.com/melanni3h/la-artivist" target="_blank" class="btn-primary">VIEW ON GITHUB</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>LAST UPDATED: JANUARY 2026 | <span id="eventCount">0</span> EVENTS LISTED</p>
+            <p style="margin-top: 4px;">MAINTAINED BY THE COMMUNITY · HOSTED ON GITHUB PAGES</p>
+        </footer>
+    </div>
+
+    <script>
+        // CONFIGURATION - UPDATE THESE!
+        const GITHUB_USERNAME = 'melanni3h';  // Your GitHub username
+        const REPO_NAME = 'la-artivist';  // Your repository name
+        const EVENTS_JSON_PATH = 'events.json';    // Path to events.json in your repo
+
+        let events = [];
+        let activeCategories = new Set(['all']);
+        let activeTypes = new Set(['all']);
+
+        // Event type symbols mapping
+        const typeSymbols = {
+            'exhibition': '■',
+            'workshop': '◆',
+            'performance': '▲',
+            'film': '●',
+            'talk': '▶',
+            'reading': '◐',
+            'mural': '◀',
+            'festival': '★',
+            'concert': '♪',
+            'meeting': '○',
+            'public-art': '◇'
+        };
+
+        // Load events from JSON file
+        async function loadEvents() {
+            try {
+                const response = await fetch(EVENTS_JSON_PATH);
+                if (!response.ok) {
+                    throw new Error('Failed to load events');
+                }
+                events = await response.json();
+                renderEvents();
+                updateEventCount();
+            } catch (error) {
+                console.error('Error loading events:', error);
+                document.getElementById('calendar').innerHTML = 
+                    '<div class="loading">ERROR LOADING EVENTS. CHECK CONSOLE.</div>';
+            }
+        }
+
+        // Filter events
+        function filterEvents() {
+            return events.filter(event => {
+                // Category filter
+                const categoryMatch = activeCategories.has('all') || 
+                    event.categories.some(cat => activeCategories.has(cat));
+                
+                // Type filter
+                const typeMatch = activeTypes.has('all') || 
+                    event.eventTypes.some(type => activeTypes.has(type));
+                
+                return categoryMatch && typeMatch;
+            });
+        }
+
+        // Render events
+        function renderEvents() {
+            const calendar = document.getElementById('calendar');
+            const filteredEvents = filterEvents();
+
+            if (filteredEvents.length === 0) {
+                calendar.innerHTML = '<div class="loading">NO EVENTS MATCH FILTERS</div>';
+                return;
+            }
+
+            // Sort by date
+            filteredEvents.sort((a, b) => {
+                if (a.startDate === 'PERMANENT') return 1;
+                if (b.startDate === 'PERMANENT') return -1;
+                if (a.startDate === 'ONGOING') return 1;
+                if (b.startDate === 'ONGOING') return -1;
+                return new Date(a.startDate) - new Date(b.startDate);
+            });
+
+            calendar.innerHTML = filteredEvents.map(event => {
+                const dateStr = formatDate(event.startDate, event.endDate);
+                const categoriesHTML = event.categories.map(cat => 
+                    `<span class="category-indicator cat-${cat}"></span>`
+                ).join('');
+                const typesHTML = event.eventTypes.map(type => 
+                    `<span class="type-symbol">${typeSymbols[type] || '■'}</span>`
+                ).join('');
+                const tagsHTML = event.tags.map(tag => 
+                    `<span class="tag">${tag}</span>`
+                ).join('');
+
+                return `
+                    <div class="event-card">
+                        <div class="event-header">
+                            <div class="event-title">${event.title}</div>
+                            <div class="event-date">${dateStr}</div>
+                        </div>
+                        <div class="event-meta">
+                            <div class="event-categories">${categoriesHTML}</div>
+                            <div class="event-types">${typesHTML}</div>
+                        </div>
+                        <div class="event-venue">📍 ${event.venue}</div>
+                        <div class="event-description">${event.description}</div>
+                        <div class="event-links">
+                            ${event.eventUrl ? `<a href="${event.eventUrl}" target="_blank" class="event-link">Event Info</a>` : ''}
+                            ${event.mapQuery ? `<a href="https://www.google.com/maps/search/${encodeURIComponent(event.mapQuery)}" target="_blank" class="event-link">Map</a>` : ''}
+                        </div>
+                        ${tagsHTML ? `<div class="event-tags">${tagsHTML}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Format date
+        function formatDate(start, end) {
+            if (start === 'PERMANENT') return 'PERMANENT EXHIBITION';
+            if (start === 'ONGOING') return 'ONGOING';
+            
+            const formatSingle = (dateStr) => {
+                const date = new Date(dateStr + 'T00:00:00');
+                return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                }).toUpperCase();
+            };
+
+            if (!end) return formatSingle(start);
+            return `${formatSingle(start)} - ${formatSingle(end)}`;
+        }
+
+        // Update event count
+        function updateEventCount() {
+            document.getElementById('eventCount').textContent = filterEvents().length;
+        }
+
+        // Handle category filter clicks
+        document.getElementById('categoryFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                const category = e.target.dataset.category;
+                
+                if (category === 'all') {
+                    activeCategories.clear();
+                    activeCategories.add('all');
+                    document.querySelectorAll('#categoryFilters .filter-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.category === 'all');
+                    });
+                } else {
+                    activeCategories.delete('all');
+                    document.querySelector('#categoryFilters .filter-btn[data-category="all"]').classList.remove('active');
+                    
+                    if (activeCategories.has(category)) {
+                        activeCategories.delete(category);
+                        e.target.classList.remove('active');
+                    } else {
+                        activeCategories.add(category);
+                        e.target.classList.add('active');
+                    }
+
+                    // If no categories selected, default to all
+                    if (activeCategories.size === 0) {
+                        activeCategories.add('all');
+                        document.querySelector('#categoryFilters .filter-btn[data-category="all"]').classList.add('active');
+                    }
+                }
+
+                renderEvents();
+                updateEventCount();
+            }
+        });
+
+        // Handle type filter clicks
+        document.getElementById('typeFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                const type = e.target.dataset.type;
+                
+                if (type === 'all') {
+                    activeTypes.clear();
+                    activeTypes.add('all');
+                    document.querySelectorAll('#typeFilters .filter-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.type === 'all');
+                    });
+                } else {
+                    activeTypes.delete('all');
+                    document.querySelector('#typeFilters .filter-btn[data-type="all"]').classList.remove('active');
+                    
+                    if (activeTypes.has(type)) {
+                        activeTypes.delete(type);
+                        e.target.classList.remove('active');
+                    } else {
+                        activeTypes.add(type);
+                        e.target.classList.add('active');
+                    }
+
+                    // If no types selected, default to all
+                    if (activeTypes.size === 0) {
+                        activeTypes.add('all');
+                        document.querySelector('#typeFilters .filter-btn[data-type="all"]').classList.add('active');
+                    }
+                }
+
+                renderEvents();
+                updateEventCount();
+            }
+        });
+
+        // Submit event button
+        document.getElementById('submitBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const issueUrl = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}/issues/new?template=event_submission.md&title=New+Event+Submission`;
+            window.open(issueUrl, '_blank');
+        });
+
+        // Load events on page load
+        loadEvents();
+    </script>
+</body>
+</html>
