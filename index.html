@@ -182,6 +182,16 @@
             border: 1px solid var(--black);
             padding: 12px;
             transition: none;
+            position: relative;
+        }
+
+        .event-card.active {
+            border-left: 4px solid var(--black);
+            padding-left: 10px;
+        }
+
+        .event-card.past {
+            opacity: 0.5;
         }
 
         .event-card:hover {
@@ -440,55 +450,9 @@
                             <button class="filter-btn" data-type="public-art">Public Art</button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Legend -->
-                <div class="legend">
-                    <div class="legend-title">Legend</div>
-                    <div class="legend-grid">
-                        <div class="legend-item">
-                            <span class="category-indicator cat-immigration"></span>
-                            <span>Immigration & Border Justice</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-chicano"></span>
-                            <span>Chicano/Latinx Liberation</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-black-liberation"></span>
-                            <span>Black Liberation</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-aapi"></span>
-                            <span>AAPI Rights & History</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-environmental"></span>
-                            <span>Environmental Justice</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-indigenous"></span>
-                            <span>Indigenous Rights</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="category-indicator cat-intersectional"></span>
-                            <span>Intersectional/Coalition</span>
-                        </div>
-                    </div>
-                    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--black);">
-                        <div class="legend-title" style="margin-bottom: 6px;">Event Types</div>
-                        <div style="line-height: 1.8;">
-                            <span class="type-symbol">■</span> Exhibition
-                            <span class="type-symbol" style="margin-left: 8px;">◆</span> Workshop
-                            <span class="type-symbol" style="margin-left: 8px;">▲</span> Performance
-                            <span class="type-symbol" style="margin-left: 8px;">●</span> Film<br>
-                            <span class="type-symbol">▶</span> Talk
-                            <span class="type-symbol" style="margin-left: 8px;">◐</span> Reading
-                            <span class="type-symbol" style="margin-left: 8px;">◀</span> Mural
-                            <span class="type-symbol" style="margin-left: 8px;">★</span> Festival<br>
-                            <span class="type-symbol">♪</span> Concert
-                            <span class="type-symbol" style="margin-left: 8px;">○</span> Meeting
-                            <span class="type-symbol" style="margin-left: 8px;">◇</span> Public Art
+                    <div class="filter-section" style="border-top: 1px solid var(--black); padding-top: 12px; margin-top: 12px;">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" id="showArchiveBtn" style="width: 100%;">SHOW ARCHIVED EVENTS</button>
                         </div>
                     </div>
                 </div>
@@ -511,10 +475,46 @@
                 </div>
 
                 <div class="sidebar-section">
+                    <div class="sidebar-header" style="cursor: pointer; user-select: none;" id="legendToggle">
+                        LEGEND <span id="legendArrow" style="float: right;">▼</span>
+                    </div>
+                    <div class="sidebar-content" id="legendContent">
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Categories</div>
+                            <div style="line-height: 1.8; font-size: 8px;">
+                                <span class="category-indicator cat-immigration"></span> Immigration<br>
+                                <span class="category-indicator cat-chicano"></span> Chicano/Latinx<br>
+                                <span class="category-indicator cat-black-liberation"></span> Black Liberation<br>
+                                <span class="category-indicator cat-aapi"></span> AAPI<br>
+                                <span class="category-indicator cat-environmental"></span> Environmental<br>
+                                <span class="category-indicator cat-indigenous"></span> Indigenous<br>
+                                <span class="category-indicator cat-intersectional"></span> Intersectional
+                            </div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Event Types</div>
+                            <div style="line-height: 1.8; font-size: 8px;">
+                                <span class="type-symbol">■</span> Exhibition
+                                <span class="type-symbol">◆</span> Workshop<br>
+                                <span class="type-symbol">▲</span> Performance
+                                <span class="type-symbol">●</span> Film<br>
+                                <span class="type-symbol">▸</span> Talk
+                                <span class="type-symbol">◐</span> Reading<br>
+                                <span class="type-symbol">▪</span> Mural
+                                <span class="type-symbol">★</span> Festival<br>
+                                <span class="type-symbol">♪</span> Concert
+                                <span class="type-symbol">○</span> Meeting<br>
+                                <span class="type-symbol">◇</span> Public Art
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
                     <div class="sidebar-header">RECOMMENDED READING</div>
                     <div class="sidebar-content">
                         <p style="margin-bottom: 8px;"><a href="https://www.rebelyellcreative.com/the-art-of-resistance-podcast" target="_blank" style="color: var(--black); text-decoration: underline;">🎙️ The Art of Resistance</a><br><span style="font-size: 8px; color: var(--gray);">Podcast</span></p>
-                        <p><a href="https://monoskop.org/images/f/f3/Felshin_Nina_ed_But_Is_It_Art_The_Spirit_of_Art_as_Activism_1994.pdf" target="_blank" style="color: var(--black); text-decoration: underline;">📖 But is it art?</a><br><span style="font-size: 8px; color: var(--gray);">PDF</span></p>
+                        <p><a href="#" target="_blank" style="color: var(--black); text-decoration: underline;">📖 But is it art?</a><br><span style="font-size: 8px; color: var(--gray);">PDF</span></p>
                     </div>
                 </div>
 
@@ -542,7 +542,7 @@
         </div>
 
         <footer>
-            <p>LAST UPDATED: JANUARY 2026 | <span id="eventCount">0</span> EVENTS LISTED</p>
+            <p><span id="eventCount">0</span> EVENTS | LAST UPDATED: JANUARY 2026</p>
             <p style="margin-top: 4px;">MAINTAINED BY THE COMMUNITY · HOSTED ON GITHUB PAGES</p>
         </footer>
     </div>
@@ -556,6 +556,52 @@
         let events = [];
         let activeCategories = new Set(['all']);
         let activeTypes = new Set(['all']);
+        let showArchived = true;
+
+        // Get event status based on dates
+        function getEventStatus(event) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // PERMANENT and ONGOING are always active
+            if (event.startDate === 'PERMANENT' || event.startDate === 'ONGOING') {
+                return 'active';
+            }
+
+            const startDate = new Date(event.startDate + 'T00:00:00');
+            const endDate = event.endDate ? new Date(event.endDate + 'T00:00:00') : startDate;
+
+            if (endDate < today) {
+                return 'past';
+            } else if (startDate <= today && today <= endDate) {
+                return 'active';
+            } else {
+                return 'upcoming';
+            }
+        }
+
+        // Sort events: active/upcoming first, then past (by date within each group)
+        function sortEvents(eventsList) {
+            return eventsList.sort((a, b) => {
+                const statusA = getEventStatus(a);
+                const statusB = getEventStatus(b);
+                
+                // Priority: active/upcoming > past
+                const statusOrder = { 'active': 0, 'upcoming': 0, 'past': 1 };
+                
+                if (statusOrder[statusA] !== statusOrder[statusB]) {
+                    return statusOrder[statusA] - statusOrder[statusB];
+                }
+                
+                // Within same status group, sort by date
+                if (a.startDate === 'PERMANENT') return -1;
+                if (b.startDate === 'PERMANENT') return 1;
+                if (a.startDate === 'ONGOING') return -1;
+                if (b.startDate === 'ONGOING') return 1;
+                
+                return new Date(a.startDate) - new Date(b.startDate);
+            });
+        }
 
         // Event type symbols mapping
         const typeSymbols = {
@@ -563,9 +609,9 @@
             'workshop': '◆',
             'performance': '▲',
             'film': '●',
-            'talk': '▶',
+            'talk': '▸',
             'reading': '◐',
-            'mural': '◀',
+            'mural': '▪',
             'festival': '★',
             'concert': '♪',
             'meeting': '○',
@@ -614,47 +660,65 @@
                 return;
             }
 
-            // Sort by date
-            filteredEvents.sort((a, b) => {
-                if (a.startDate === 'PERMANENT') return 1;
-                if (b.startDate === 'PERMANENT') return -1;
-                if (a.startDate === 'ONGOING') return 1;
-                if (b.startDate === 'ONGOING') return -1;
-                return new Date(a.startDate) - new Date(b.startDate);
+            // Sort by status and date
+            const sortedEvents = sortEvents(filteredEvents);
+
+            // Group events by status
+            const activeEvents = sortedEvents.filter(e => {
+                const status = getEventStatus(e);
+                return status === 'active' || status === 'upcoming';
             });
+            const pastEvents = sortedEvents.filter(e => getEventStatus(e) === 'past');
 
-            calendar.innerHTML = filteredEvents.map(event => {
-                const dateStr = formatDate(event.startDate, event.endDate);
-                const categoriesHTML = event.categories.map(cat => 
-                    `<span class="category-indicator cat-${cat}"></span>`
-                ).join('');
-                const typesHTML = event.eventTypes.map(type => 
-                    `<span class="type-symbol">${typeSymbols[type] || '■'}</span>`
-                ).join('');
-                const tagsHTML = event.tags.map(tag => 
-                    `<span class="tag">${tag}</span>`
-                ).join('');
+            let html = '';
 
-                return `
-                    <div class="event-card">
-                        <div class="event-header">
-                            <div class="event-title">${event.title}</div>
-                            <div class="event-date">${dateStr}</div>
-                        </div>
-                        <div class="event-meta">
-                            <div class="event-categories">${categoriesHTML}</div>
-                            <div class="event-types">${typesHTML}</div>
-                        </div>
-                        <div class="event-venue">📍 ${event.venue}</div>
-                        <div class="event-description">${event.description}</div>
-                        <div class="event-links">
-                            ${event.eventUrl ? `<a href="${event.eventUrl}" target="_blank" class="event-link">Event Info</a>` : ''}
-                            ${event.mapQuery ? `<a href="https://www.google.com/maps/search/${encodeURIComponent(event.mapQuery)}" target="_blank" class="event-link">Map</a>` : ''}
-                        </div>
-                        ${tagsHTML ? `<div class="event-tags">${tagsHTML}</div>` : ''}
+            // Active/Upcoming section
+            if (activeEvents.length > 0) {
+                html += '<div style="border: 2px solid var(--black); padding: 8px; margin-bottom: 16px; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 1px;">ACTIVE & UPCOMING EVENTS</div>';
+                html += activeEvents.map(event => renderEventCard(event, 'active')).join('');
+            }
+
+            // Archived section (only if showArchived is true)
+            if (showArchived && pastEvents.length > 0) {
+                html += '<div style="border: 2px solid var(--black); padding: 8px; margin: 16px 0; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; color: var(--gray);">ARCHIVED EVENTS</div>';
+                html += pastEvents.map(event => renderEventCard(event, 'past')).join('');
+            }
+
+            calendar.innerHTML = html;
+        }
+
+        // Render individual event card
+        function renderEventCard(event, statusClass) {
+            const dateStr = formatDate(event.startDate, event.endDate);
+            const categoriesHTML = event.categories.map(cat => 
+                `<span class="category-indicator cat-${cat}"></span>`
+            ).join('');
+            const typesHTML = event.eventTypes.map(type => 
+                `<span class="type-symbol">${typeSymbols[type] || '■'}</span>`
+            ).join('');
+            const tagsHTML = event.tags.map(tag => 
+                `<span class="tag">${tag}</span>`
+            ).join('');
+
+            return `
+                <div class="event-card ${statusClass}">
+                    <div class="event-header">
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-date">${dateStr}</div>
                     </div>
-                `;
-            }).join('');
+                    <div class="event-meta">
+                        <div class="event-categories">${categoriesHTML}</div>
+                        <div class="event-types">${typesHTML}</div>
+                    </div>
+                    <div class="event-venue">VENUE: ${event.venue}</div>
+                    <div class="event-description">${event.description}</div>
+                    <div class="event-links">
+                        ${event.eventUrl ? `<a href="${event.eventUrl}" target="_blank" class="event-link">Event Info</a>` : ''}
+                        ${event.mapQuery ? `<a href="https://www.google.com/maps/search/${encodeURIComponent(event.mapQuery)}" target="_blank" class="event-link">Map</a>` : ''}
+                    </div>
+                    ${tagsHTML ? `<div class="event-tags">${tagsHTML}</div>` : ''}
+                </div>
+            `;
         }
 
         // Format date
@@ -677,7 +741,16 @@
 
         // Update event count
         function updateEventCount() {
-            document.getElementById('eventCount').textContent = filterEvents().length;
+            const filtered = filterEvents();
+            const active = filtered.filter(e => {
+                const status = getEventStatus(e);
+                return status === 'active' || status === 'upcoming';
+            }).length;
+            const total = filtered.length;
+            
+            document.getElementById('eventCount').textContent = showArchived 
+                ? `${active} ACTIVE | ${total} TOTAL`
+                : `${active} ACTIVE`;
         }
 
         // Handle category filter clicks
@@ -755,6 +828,29 @@
             e.preventDefault();
             const issueUrl = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}/issues/new?template=event_submission.md&title=New+Event+Submission`;
             window.open(issueUrl, '_blank');
+        });
+
+        // Collapsible legend toggle
+        document.getElementById('legendToggle').addEventListener('click', () => {
+            const content = document.getElementById('legendContent');
+            const arrow = document.getElementById('legendArrow');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                arrow.textContent = '▶';
+            }
+        });
+
+        // Archive toggle
+        document.getElementById('showArchiveBtn').addEventListener('click', (e) => {
+            showArchived = !showArchived;
+            e.target.classList.toggle('active', showArchived);
+            e.target.textContent = showArchived ? 'SHOW ARCHIVED EVENTS' : 'HIDE ARCHIVED EVENTS';
+            renderEvents();
+            updateEventCount();
         });
 
         // Load events on page load
