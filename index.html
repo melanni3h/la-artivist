@@ -57,6 +57,51 @@
             color: var(--gray);
         }
 
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border: 2px solid var(--black);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px;
+            background: var(--white);
+            border: none;
+            border-right: 2px solid var(--black);
+            cursor: pointer;
+            transition: none;
+        }
+
+        .tab:last-child {
+            border-right: none;
+        }
+
+        .tab:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .tab.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         /* Main Layout */
         .main-layout {
             display: grid;
@@ -133,7 +178,9 @@
         .cat-aapi { background: repeating-linear-gradient(0deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
         .cat-environmental { background: repeating-linear-gradient(90deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
         .cat-indigenous { background: radial-gradient(circle, var(--black) 1px, var(--white) 1px, var(--white) 2px, var(--black) 2px, var(--black) 3px); background-size: 4px 4px; }
-        .cat-intersectional { background: var(--white); }
+        .cat-lgbtqia { background: repeating-linear-gradient(135deg, var(--black), var(--black) 1px, var(--white) 1px, var(--white) 2px, var(--black) 2px, var(--black) 3px, var(--white) 3px, var(--white) 4px); }
+        .cat-womens-liberation { background: repeating-linear-gradient(-45deg, var(--black), var(--black) 2px, var(--white) 2px, var(--white) 4px); }
+        .cat-economic-justice { background: linear-gradient(to bottom, var(--black) 50%, var(--white) 50%); }
 
         /* Event Type Symbols */
         .type-symbol {
@@ -415,6 +462,14 @@
             <p class="subtitle">Activism + Art Calendar for Los Angeles · Community Curated</p>
         </header>
 
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="events">EVENTS</button>
+            <button class="tab" data-tab="calls">CALL TO ARTISTS</button>
+        </div>
+
+        <!-- Events Tab Content -->
+        <div id="events-tab" class="tab-content active">
         <div class="main-layout">
             <!-- Main Content -->
             <div class="main-content">
@@ -430,7 +485,9 @@
                             <button class="filter-btn" data-category="aapi">AAPI</button>
                             <button class="filter-btn" data-category="environmental">Environmental</button>
                             <button class="filter-btn" data-category="indigenous">Indigenous</button>
-                            <button class="filter-btn" data-category="intersectional">Intersectional</button>
+                            <button class="filter-btn" data-category="lgbtqia">LGBTQIA+</button>
+                            <button class="filter-btn" data-category="womens-liberation">Women's Liberation</button>
+                            <button class="filter-btn" data-category="economic-justice">Economic Justice</button>
                         </div>
                     </div>
                     <div class="filter-section">
@@ -455,6 +512,46 @@
                             <button class="filter-btn active" id="showArchiveBtn" style="width: 100%;">SHOW ARCHIVED EVENTS</button>
                         </div>
                     </div>
+                    
+                    <!-- Collapsible Legend -->
+                    <div class="filter-section" style="border-top: 1px solid var(--black); padding-top: 12px; margin-top: 12px;">
+                        <div style="cursor: pointer; user-select: none; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" id="legendToggleMain">
+                            <span>LEGEND</span>
+                            <span id="legendArrowMain">▶</span>
+                        </div>
+                        <div id="legendContentMain" style="display: none;">
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Categories</div>
+                                <div style="line-height: 1.8; font-size: 8px;">
+                                    <span class="category-indicator cat-immigration"></span> Immigration<br>
+                                    <span class="category-indicator cat-chicano"></span> Chicano/Latinx<br>
+                                    <span class="category-indicator cat-black-liberation"></span> Black Liberation<br>
+                                    <span class="category-indicator cat-aapi"></span> AAPI<br>
+                                    <span class="category-indicator cat-environmental"></span> Environmental<br>
+                                    <span class="category-indicator cat-indigenous"></span> Indigenous<br>
+                                    <span class="category-indicator cat-lgbtqia"></span> LGBTQIA+<br>
+                                    <span class="category-indicator cat-womens-liberation"></span> Women's Liberation<br>
+                                    <span class="category-indicator cat-economic-justice"></span> Economic Justice
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Event Types</div>
+                                <div style="line-height: 1.8; font-size: 8px;">
+                                    <span class="type-symbol">■</span> Exhibition
+                                    <span class="type-symbol">◆</span> Workshop<br>
+                                    <span class="type-symbol">▲</span> Performance
+                                    <span class="type-symbol">●</span> Film<br>
+                                    <span class="type-symbol">▸</span> Talk
+                                    <span class="type-symbol">◐</span> Reading<br>
+                                    <span class="type-symbol">▪</span> Mural
+                                    <span class="type-symbol">★</span> Festival<br>
+                                    <span class="type-symbol">♪</span> Concert
+                                    <span class="type-symbol">○</span> Meeting<br>
+                                    <span class="type-symbol">◇</span> Public Art
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Calendar -->
@@ -475,38 +572,27 @@
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-header" style="cursor: pointer; user-select: none;" id="legendToggle">
-                        LEGEND <span id="legendArrow" style="float: right;">▼</span>
-                    </div>
-                    <div class="sidebar-content" id="legendContent">
-                        <div style="margin-bottom: 10px;">
-                            <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Categories</div>
-                            <div style="line-height: 1.8; font-size: 8px;">
-                                <span class="category-indicator cat-immigration"></span> Immigration<br>
-                                <span class="category-indicator cat-chicano"></span> Chicano/Latinx<br>
-                                <span class="category-indicator cat-black-liberation"></span> Black Liberation<br>
-                                <span class="category-indicator cat-aapi"></span> AAPI<br>
-                                <span class="category-indicator cat-environmental"></span> Environmental<br>
-                                <span class="category-indicator cat-indigenous"></span> Indigenous<br>
-                                <span class="category-indicator cat-intersectional"></span> Intersectional
-                            </div>
-                        </div>
-                        <div>
-                            <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Event Types</div>
-                            <div style="line-height: 1.8; font-size: 8px;">
-                                <span class="type-symbol">■</span> Exhibition
-                                <span class="type-symbol">◆</span> Workshop<br>
-                                <span class="type-symbol">▲</span> Performance
-                                <span class="type-symbol">●</span> Film<br>
-                                <span class="type-symbol">▸</span> Talk
-                                <span class="type-symbol">◐</span> Reading<br>
-                                <span class="type-symbol">▪</span> Mural
-                                <span class="type-symbol">★</span> Festival<br>
-                                <span class="type-symbol">♪</span> Concert
-                                <span class="type-symbol">○</span> Meeting<br>
-                                <span class="type-symbol">◇</span> Public Art
-                            </div>
-                        </div>
+                    <div class="sidebar-header">PERMANENT EXHIBITIONS & VENUES</div>
+                    <div class="sidebar-content">
+                        <p style="margin-bottom: 8px;"><a href="https://greatwallinstitute.sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">The Great Wall of LA</a><br><span style="font-size: 8px; color: var(--gray);">Tujunga Wash, N. Hollywood · Free</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://lapca.org/" target="_blank" style="color: var(--black); text-decoration: underline;">LA Plaza de Cultura y Artes</a><br><span style="font-size: 8px; color: var(--gray);">LA Starts Here! (Permanent) · Free Wed-Sun</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://www.museumofsocialjustice.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Museum of Social Justice</a><br><span style="font-size: 8px; color: var(--gray);">Multiple ongoing exhibitions · Free Thu-Sun</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://vincentpriceartmuseum.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Vincent Price Art Museum</a><br><span style="font-size: 8px; color: var(--gray);">Always Free</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">SPARC Gallery</a><br><span style="font-size: 8px; color: var(--gray);">Bergamot Station · Rotating exhibitions</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://one.usc.edu/" target="_blank" style="color: var(--black); text-decoration: underline;">ONE Archives</a><br><span style="font-size: 8px; color: var(--gray);">USC Libraries · Largest LGBTQ+ archive</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://www.oneinstitute.org/" target="_blank" style="color: var(--black); text-decoration: underline;">ONE Gallery</a><br><span style="font-size: 8px; color: var(--gray);">West Hollywood · LGBTQ+ exhibitions</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://www.instagram.com/allpowerbooks/" target="_blank" style="color: var(--black); text-decoration: underline;">All Power Books</a><br><span style="font-size: 8px; color: var(--gray);">West Adams · Ongoing events</span></p>
+                        
+                        <p style="margin-bottom: 8px;"><a href="https://thestrategycenter.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Strategy and Soul</a><br><span style="font-size: 8px; color: var(--gray);">South Central · Talks & readings</span></p>
+                        
+                        <p><a href="https://molaa.org/" target="_blank" style="color: var(--black); text-decoration: underline;">MOLAA</a><br><span style="font-size: 8px; color: var(--gray);">Long Beach · Free Sundays</span></p>
                     </div>
                 </div>
 
@@ -519,27 +605,142 @@
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-header">QUICK LINKS</div>
-                    <div class="sidebar-content">
-                        <p style="margin-bottom: 8px;"><a href="https://molaa.org/" target="_blank" style="color: var(--black); text-decoration: underline;">MOLAA</a><br><span style="font-size: 8px; color: var(--gray);">Free Sundays</span></p>
-                        <p style="margin-bottom: 8px;"><a href="https://vincentpriceartmuseum.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Vincent Price Art Museum</a><br><span style="font-size: 8px; color: var(--gray);">Always Free</span></p>
-                        <p style="margin-bottom: 8px;"><a href="https://lapca.org/" target="_blank" style="color: var(--black); text-decoration: underline;">LA Plaza de Cultura</a><br><span style="font-size: 8px; color: var(--gray);">Free Wed-Sun</span></p>
-                        <p style="margin-bottom: 8px;"><a href="https://www.museumofsocialjustice.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Museum of Social Justice</a><br><span style="font-size: 8px; color: var(--gray);">Free Thu-Sun</span></p>
-                        <p style="margin-bottom: 8px;"><a href="https://sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">SPARC</a></p>
-                        <p style="margin-bottom: 8px;"><a href="https://www.instagram.com/allpowerbooks/" target="_blank" style="color: var(--black); text-decoration: underline;">All Power Books</a></p>
-                        <p><a href="https://thestrategycenter.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Strategy and Soul</a></p>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
                     <div class="sidebar-header">CONTRIBUTE</div>
                     <div class="sidebar-content">
                         <p style="margin-bottom: 8px;">This is an open-source project. View on GitHub to contribute.</p>
-                        <a href="https://github.com/melanni3h/la-artivist" target="_blank" class="btn-primary">VIEW ON GITHUB</a>
+                        <a href="https://github.com/YOUR-USERNAME/la-artivist" target="_blank" class="btn-primary">VIEW ON GITHUB</a>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        <!-- End Events Tab -->
+
+        <!-- Call to Artists Tab Content -->
+        <div id="calls-tab" class="tab-content">
+            <div class="main-layout">
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Filters for Calls -->
+                    <div class="filters">
+                        <div class="filter-section">
+                            <div class="filter-title">Categories</div>
+                            <div class="filter-buttons" id="callCategoryFilters">
+                                <button class="filter-btn active" data-category="all">All</button>
+                                <button class="filter-btn" data-category="immigration">Immigration</button>
+                                <button class="filter-btn" data-category="chicano">Chicano/Latinx</button>
+                                <button class="filter-btn" data-category="black-liberation">Black Liberation</button>
+                                <button class="filter-btn" data-category="aapi">AAPI</button>
+                                <button class="filter-btn" data-category="environmental">Environmental</button>
+                                <button class="filter-btn" data-category="indigenous">Indigenous</button>
+                                <button class="filter-btn" data-category="lgbtqia">LGBTQIA+</button>
+                                <button class="filter-btn" data-category="womens-liberation">Women's Liberation</button>
+                                <button class="filter-btn" data-category="economic-justice">Economic Justice</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <div class="filter-title">Opportunity Types</div>
+                            <div class="filter-buttons" id="callTypeFilters">
+                                <button class="filter-btn active" data-calltype="all">All</button>
+                                <button class="filter-btn" data-calltype="grant">Grant</button>
+                                <button class="filter-btn" data-calltype="residency">Residency</button>
+                                <button class="filter-btn" data-calltype="fellowship">Fellowship</button>
+                                <button class="filter-btn" data-calltype="exhibition-opportunity">Exhibition</button>
+                                <button class="filter-btn" data-calltype="publication">Publication</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-section" style="border-top: 1px solid var(--black); padding-top: 12px; margin-top: 12px;">
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" id="showCallsArchiveBtn" style="width: 100%;">SHOW ARCHIVED CALLS</button>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Legend for Calls -->
+                        <div class="filter-section" style="border-top: 1px solid var(--black); padding-top: 12px; margin-top: 12px;">
+                            <div style="cursor: pointer; user-select: none; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;" id="callsLegendToggle">
+                                <span>LEGEND</span>
+                                <span id="callsLegendArrow">▶</span>
+                            </div>
+                            <div id="callsLegendContent" style="display: none;">
+                                <div style="margin-bottom: 10px;">
+                                    <div style="font-weight: 700; font-size: 8px; text-transform: uppercase; margin-bottom: 6px; border-bottom: 1px solid var(--black); padding-bottom: 3px;">Categories</div>
+                                    <div style="line-height: 1.8; font-size: 8px;">
+                                        <span class="category-indicator cat-immigration"></span> Immigration<br>
+                                        <span class="category-indicator cat-chicano"></span> Chicano/Latinx<br>
+                                        <span class="category-indicator cat-black-liberation"></span> Black Liberation<br>
+                                        <span class="category-indicator cat-aapi"></span> AAPI<br>
+                                        <span class="category-indicator cat-environmental"></span> Environmental<br>
+                                        <span class="category-indicator cat-indigenous"></span> Indigenous<br>
+                                        <span class="category-indicator cat-lgbtqia"></span> LGBTQIA+<br>
+                                        <span class="category-indicator cat-womens-liberation"></span> Women's Liberation<br>
+                                        <span class="category-indicator cat-economic-justice"></span> Economic Justice
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="events-count" id="callsCount">Loading opportunities...</div>
+                    <div id="callsContainer"></div>
+                </div>
+
+                <!-- Sidebar (same as exhibitions) -->
+                <div class="sidebar">
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">SUBMIT OPPORTUNITY</div>
+                        <div class="sidebar-content">
+                            <p>Know of an open call or opportunity for activist artists? Submit via GitHub Issues.</p>
+                            <a href="#" class="btn-primary" id="submitCallBtn">SUBMIT CALL</a>
+                            <p style="margin-top: 8px; font-size: 8px; color: var(--gray);">Requires GitHub account</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">PERMANENT EXHIBITIONS & VENUES</div>
+                        <div class="sidebar-content">
+                            <p style="margin-bottom: 8px;"><a href="https://greatwallinstitute.sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">The Great Wall of LA</a><br><span style="font-size: 8px; color: var(--gray);">Tujunga Wash, N. Hollywood · Free</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://lapca.org/" target="_blank" style="color: var(--black); text-decoration: underline;">LA Plaza de Cultura y Artes</a><br><span style="font-size: 8px; color: var(--gray);">LA Starts Here! (Permanent) · Free Wed-Sun</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://www.museumofsocialjustice.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Museum of Social Justice</a><br><span style="font-size: 8px; color: var(--gray);">Multiple ongoing exhibitions · Free Thu-Sun</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://vincentpriceartmuseum.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Vincent Price Art Museum</a><br><span style="font-size: 8px; color: var(--gray);">Always Free</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://sparcinla.org/" target="_blank" style="color: var(--black); text-decoration: underline;">SPARC Gallery</a><br><span style="font-size: 8px; color: var(--gray);">Bergamot Station · Rotating exhibitions</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://one.usc.edu/" target="_blank" style="color: var(--black); text-decoration: underline;">ONE Archives</a><br><span style="font-size: 8px; color: var(--gray);">USC Libraries · Largest LGBTQ+ archive</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://www.oneinstitute.org/" target="_blank" style="color: var(--black); text-decoration: underline;">ONE Gallery</a><br><span style="font-size: 8px; color: var(--gray);">West Hollywood · LGBTQ+ exhibitions</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://www.instagram.com/allpowerbooks/" target="_blank" style="color: var(--black); text-decoration: underline;">All Power Books</a><br><span style="font-size: 8px; color: var(--gray);">West Adams · Ongoing events</span></p>
+                            
+                            <p style="margin-bottom: 8px;"><a href="https://thestrategycenter.org/" target="_blank" style="color: var(--black); text-decoration: underline;">Strategy and Soul</a><br><span style="font-size: 8px; color: var(--gray);">South Central · Talks & readings</span></p>
+                            
+                            <p><a href="https://molaa.org/" target="_blank" style="color: var(--black); text-decoration: underline;">MOLAA</a><br><span style="font-size: 8px; color: var(--gray);">Long Beach · Free Sundays</span></p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">RECOMMENDED READING</div>
+                        <div class="sidebar-content">
+                            <p style="margin-bottom: 8px;"><a href="https://www.rebelyellcreative.com/the-art-of-resistance-podcast" target="_blank" style="color: var(--black); text-decoration: underline;">🎙️ The Art of Resistance</a><br><span style="font-size: 8px; color: var(--gray);">Podcast</span></p>
+                            <p><a href="#" target="_blank" style="color: var(--black); text-decoration: underline;">📖 But is it art?</a><br><span style="font-size: 8px; color: var(--gray);">PDF</span></p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">CONTRIBUTE</div>
+                        <div class="sidebar-content">
+                            <p style="margin-bottom: 8px;">This is an open-source project. View on GitHub to contribute.</p>
+                            <a href="https://github.com/YOUR-USERNAME/la-artivist" target="_blank" class="btn-primary">VIEW ON GITHUB</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Call to Artists Tab -->
 
         <footer>
             <p><span id="eventCount">0</span> EVENTS | LAST UPDATED: JANUARY 2026</p>
@@ -549,14 +750,33 @@
 
     <script>
         // CONFIGURATION - UPDATE THESE!
-        const GITHUB_USERNAME = 'melanni3h';  // Your GitHub username
+        const GITHUB_USERNAME = 'YOUR-USERNAME';  // Your GitHub username
         const REPO_NAME = 'la-artivist';  // Your repository name
-        const EVENTS_JSON_PATH = 'events.json';    // Path to events.json in your repo
+        const EVENTS_JSON_PATH = 'submissions.json';    // Path to submissions.json in your repo
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            });
+        });
 
         let events = [];
+        let calls = [];
         let activeCategories = new Set(['all']);
         let activeTypes = new Set(['all']);
+        let activeCallCategories = new Set(['all']);
+        let activeCallTypes = new Set(['all']);
         let showArchived = true;
+        let showCallsArchived = true;
 
         // Get event status based on dates
         function getEventStatus(event) {
@@ -618,6 +838,15 @@
             'public-art': '◇'
         };
 
+        // Call type symbols mapping
+        const callTypeSymbols = {
+            'grant': '💰',
+            'residency': '🏠',
+            'fellowship': '🎓',
+            'exhibition-opportunity': '🖼️',
+            'publication': '📚'
+        };
+
         // Load events from JSON file
         async function loadEvents() {
             try {
@@ -625,13 +854,22 @@
                 if (!response.ok) {
                     throw new Error('Failed to load events');
                 }
-                events = await response.json();
+                const allData = await response.json();
+                
+                // Separate regular events from calls
+                events = allData.filter(item => !item.callTypes);
+                calls = allData.filter(item => item.callTypes);
+                
                 renderEvents();
                 updateEventCount();
+                renderCalls();
+                updateCallsCount();
             } catch (error) {
                 console.error('Error loading events:', error);
                 document.getElementById('calendar').innerHTML = 
                     '<div class="loading">ERROR LOADING EVENTS. CHECK CONSOLE.</div>';
+                document.getElementById('callsContainer').innerHTML = 
+                    '<div class="loading">ERROR LOADING CALLS. CHECK CONSOLE.</div>';
             }
         }
 
@@ -693,9 +931,19 @@
             const categoriesHTML = event.categories.map(cat => 
                 `<span class="category-indicator cat-${cat}"></span>`
             ).join('');
-            const typesHTML = event.eventTypes.map(type => 
-                `<span class="type-symbol">${typeSymbols[type] || '■'}</span>`
-            ).join('');
+            
+            // Handle both regular events (eventTypes) and calls (callTypes)
+            let typesHTML = '';
+            if (event.callTypes) {
+                typesHTML = event.callTypes.map(type => 
+                    `<span class="type-symbol">${callTypeSymbols[type] || '💰'}</span>`
+                ).join('');
+            } else if (event.eventTypes) {
+                typesHTML = event.eventTypes.map(type => 
+                    `<span class="type-symbol">${typeSymbols[type] || '■'}</span>`
+                ).join('');
+            }
+            
             const tagsHTML = event.tags.map(tag => 
                 `<span class="tag">${tag}</span>`
             ).join('');
@@ -752,6 +1000,167 @@
                 ? `${active} ACTIVE | ${total} TOTAL`
                 : `${active} ACTIVE`;
         }
+
+        // ===== CALL TO ARTISTS FUNCTIONS =====
+
+        // Filter calls
+        function filterCalls() {
+            return calls.filter(call => {
+                const categoryMatch = activeCallCategories.has('all') || 
+                    call.categories.some(cat => activeCallCategories.has(cat));
+                
+                const callTypeMatch = activeCallTypes.has('all') || 
+                    call.callTypes.some(type => activeCallTypes.has(type));
+                
+                return categoryMatch && callTypeMatch;
+            });
+        }
+
+        // Render calls
+        function renderCalls() {
+            const container = document.getElementById('callsContainer');
+            const filteredCalls = filterCalls();
+
+            if (filteredCalls.length === 0) {
+                container.innerHTML = '<div class="loading">NO OPPORTUNITIES MATCH FILTERS</div>';
+                return;
+            }
+
+            const sortedCalls = sortEvents(filteredCalls);
+            const activeCalls = sortedCalls.filter(c => {
+                const status = getEventStatus(c);
+                return status === 'active' || status === 'upcoming';
+            });
+            const pastCalls = sortedCalls.filter(c => getEventStatus(c) === 'past');
+
+            let html = '';
+
+            if (activeCalls.length > 0) {
+                html += '<div style="border: 2px solid var(--black); padding: 8px; margin-bottom: 16px; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 1px;">OPEN CALLS</div>';
+                html += activeCalls.map(call => renderEventCard(call, 'active')).join('');
+            }
+
+            if (showCallsArchived && pastCalls.length > 0) {
+                html += '<div style="border: 2px solid var(--black); padding: 8px; margin: 16px 0; font-weight: 700; text-transform: uppercase; font-size: 10px; letter-spacing: 1px;">ARCHIVED CALLS</div>';
+                html += pastCalls.map(call => renderEventCard(call, 'past')).join('');
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Update calls count
+        function updateCallsCount() {
+            const filtered = filterCalls();
+            const active = filtered.filter(c => {
+                const status = getEventStatus(c);
+                return status === 'active' || status === 'upcoming';
+            }).length;
+            const total = filtered.length;
+            
+            document.getElementById('callsCount').textContent = showCallsArchived 
+                ? `${active} OPEN | ${total} TOTAL`
+                : `${active} OPEN`;
+        }
+
+        // Handle call category filter clicks
+        document.getElementById('callCategoryFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                const category = e.target.dataset.category;
+                
+                if (category === 'all') {
+                    activeCallCategories.clear();
+                    activeCallCategories.add('all');
+                    document.querySelectorAll('#callCategoryFilters .filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.dataset.category === 'all') btn.classList.add('active');
+                    });
+                } else {
+                    if (activeCallCategories.has('all')) {
+                        activeCallCategories.delete('all');
+                        document.querySelector('#callCategoryFilters [data-category="all"]').classList.remove('active');
+                    }
+                    
+                    if (activeCallCategories.has(category)) {
+                        activeCallCategories.delete(category);
+                        e.target.classList.remove('active');
+                    } else {
+                        activeCallCategories.add(category);
+                        e.target.classList.add('active');
+                    }
+                    
+                    if (activeCallCategories.size === 0) {
+                        activeCallCategories.add('all');
+                        document.querySelector('#callCategoryFilters [data-category="all"]').classList.add('active');
+                    }
+                }
+                
+                renderCalls();
+                updateCallsCount();
+            }
+        });
+
+        // Handle call type filter clicks
+        document.getElementById('callTypeFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                const callType = e.target.dataset.calltype;
+                
+                if (callType === 'all') {
+                    activeCallTypes.clear();
+                    activeCallTypes.add('all');
+                    document.querySelectorAll('#callTypeFilters .filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.dataset.calltype === 'all') btn.classList.add('active');
+                    });
+                } else {
+                    if (activeCallTypes.has('all')) {
+                        activeCallTypes.delete('all');
+                        document.querySelector('#callTypeFilters [data-calltype="all"]').classList.remove('active');
+                    }
+                    
+                    if (activeCallTypes.has(callType)) {
+                        activeCallTypes.delete(callType);
+                        e.target.classList.remove('active');
+                    } else {
+                        activeCallTypes.add(callType);
+                        e.target.classList.add('active');
+                    }
+                    
+                    if (activeCallTypes.size === 0) {
+                        activeCallTypes.add('all');
+                        document.querySelector('#callTypeFilters [data-calltype="all"]').classList.add('active');
+                    }
+                }
+                
+                renderCalls();
+                updateCallsCount();
+            }
+        });
+
+        // Handle show archived calls button
+        document.getElementById('showCallsArchiveBtn').addEventListener('click', () => {
+            showCallsArchived = !showCallsArchived;
+            const btn = document.getElementById('showCallsArchiveBtn');
+            btn.textContent = showCallsArchived ? 'SHOW ARCHIVED CALLS' : 'HIDE ARCHIVED CALLS';
+            btn.classList.toggle('active', !showCallsArchived);
+            renderCalls();
+            updateCallsCount();
+        });
+
+        // Handle calls legend toggle
+        document.getElementById('callsLegendToggle').addEventListener('click', () => {
+            const content = document.getElementById('callsLegendContent');
+            const arrow = document.getElementById('callsLegendArrow');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                arrow.textContent = '▶';
+            }
+        });
+
+        // ===== END CALL TO ARTISTS FUNCTIONS =====
 
         // Handle category filter clicks
         document.getElementById('categoryFilters').addEventListener('click', (e) => {
@@ -830,10 +1239,17 @@
             window.open(issueUrl, '_blank');
         });
 
-        // Collapsible legend toggle
-        document.getElementById('legendToggle').addEventListener('click', () => {
-            const content = document.getElementById('legendContent');
-            const arrow = document.getElementById('legendArrow');
+        // Submit call button (Call to Artists tab)
+        document.getElementById('submitCallBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const issueUrl = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}/issues/new?template=call_to_artists_submission.md&title=New+Call+to+Artists+Submission`;
+            window.open(issueUrl, '_blank');
+        });
+
+        // Collapsible legend toggle (main filters)
+        document.getElementById('legendToggleMain').addEventListener('click', () => {
+            const content = document.getElementById('legendContentMain');
+            const arrow = document.getElementById('legendArrowMain');
             
             if (content.style.display === 'none') {
                 content.style.display = 'block';
