@@ -21,13 +21,31 @@ assignees: ''
 <!-- e.g., Museum of Contemporary Art, Los Angeles -->
 
 **Category:**
-<!-- Choose ONE:
+<!-- Choose ONE OR MORE (comma-separated):
 - immigration (Immigration & Border Justice)
-- chicano (Chicano/Latinx Activism)
+- chicano (Chicano/Latinx Liberation)
+- black-liberation (Black Liberation)
 - aapi (AAPI Rights & History)
 - environmental (Environmental Justice)
-- social-justice (Social Justice & Human Rights)
-- intersectional (Intersectional/Multiple Themes)
+- indigenous (Indigenous Rights)
+- lgbtqia (LGBTQIA+)
+- womens-liberation (Women's Liberation)
+- economic-justice (Economic Justice)
+-->
+
+**Event Type:**
+<!-- Choose ONE OR MORE (comma-separated):
+- exhibition
+- workshop
+- performance
+- film
+- talk
+- reading
+- mural
+- festival
+- concert
+- meeting
+- public-art
 -->
 
 **Description:**
@@ -47,12 +65,13 @@ assignees: ''
 ## Submission Checklist
 <!-- Mark with [x] when complete -->
 
-- [ ] Event is focused on activism, human rights, immigration, or intersectionality
+- [ ] Event is focused on activism, human rights, social justice, or liberation movements
 - [ ] Event is in the Los Angeles area or surrounding regions
 - [ ] All required fields are filled out
 - [ ] Dates are in YYYY-MM-DD format
-- [ ] Category is one of the six listed options
+- [ ] At least one category is selected
+- [ ] At least one event type is selected
 
 ---
 
-**For maintainers:** Review this submission and add to `events.json` if approved.
+**For maintainers:** Review this submission and add to `submissions.json` if approved.
